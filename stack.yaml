@@ -1,0 +1,7 @@
+resolver: lts-14.12
+
+packages:
+ - .
+
+build-deps:
+ - parsec-3.1.14.0@sha256:9f35f3a6ae66c6e1c22a1b84e62731f1501057791ffb2554f710aa08c7a4d651,4211

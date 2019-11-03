@@ -1,0 +1,49 @@
+name:                SequentExecutor
+version:             0.1.0.0
+github:              "alecsferra/SequentExecutor"
+license:             BSD3
+author:              "Alessio Ferrarini"
+maintainer:          "aferrarini01@googlemail.com"
+copyright:           "2019 Alessio Ferrarini"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/alecsferra/SequentExecutor#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- parsec
+
+library:
+  source-dirs: src
+
+executables:
+  SequentExecutor-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - SequentExecutor
+
+tests:
+  SequentExecutor-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - SequentExecutor
