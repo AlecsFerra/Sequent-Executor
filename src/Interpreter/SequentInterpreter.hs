@@ -26,7 +26,6 @@ derive s@(Sequent sx xd)
     where 
       sh = head sx
       dh = head xd
-    
 
 allAtomOrNull :: [Proposition] -> Bool
 allAtomOrNull []     = True
