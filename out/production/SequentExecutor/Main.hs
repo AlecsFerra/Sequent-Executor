@@ -12,7 +12,7 @@ main = interact (unlines . (map parseProp) . lines)
 parseProp :: String -> String
 parseProp s = case ret of
     Left e -> "error: " ++ show e
-    Right n -> "parsed: " ++ show (derive n)
+    Right n -> "parsed: " ++ show derive n
   where
     ret = parse parseSequent "" s
 
