@@ -5,6 +5,7 @@ import Type.Proposition
 import Type.Sequent
 import Text.Parsec
 import Text.Parsec.String
+import Data.List
 
 parsePropositions :: Parser [Proposition]
 parsePropositions = many parseProposition
@@ -16,4 +17,4 @@ parseSequent = do
     _ <- oneOf "⊢"
     _ <- many space
     r <- parsePropositions
-    return (Sequent l r)
+    return (Sequent (reverse l) r)

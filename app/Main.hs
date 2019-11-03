@@ -4,6 +4,7 @@ import Type.Proposition
 import Type.Sequent
 import Text.Parsec
 import Parser.SequentParser
+import Interpreter.SequentInterpreter 
 
 main :: IO ()
 main = interact (unlines . (map parseProp) . lines)
@@ -11,7 +12,7 @@ main = interact (unlines . (map parseProp) . lines)
 parseProp :: String -> String
 parseProp s = case ret of
     Left e -> "error: " ++ show e
-    Right n -> "parsed: " ++ show n
+    Right n -> "parsed: " ++ show derive n
   where
     ret = parse parseSequent "" s
 
