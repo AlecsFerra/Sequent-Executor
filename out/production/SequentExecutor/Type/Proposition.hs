@@ -18,6 +18,9 @@ instance Show Proposition where
     show (Or p1 p2) = showBracketIfNecessary p1 ++ " ∨ "  ++ showBracketIfNecessary p2
     show (Imply p1 p2) = showBracketIfNecessary p1 ++ " → " ++ showBracketIfNecessary p2
 
+--negate :: Proposition -> Proposition
+--negate (Proposition sx xd) = Proposition 
+
 showBracketIfNecessary :: Proposition -> String
 showBracketIfNecessary (Atom id) = show id
 showBracketIfNecessary TTrue = show TTrue

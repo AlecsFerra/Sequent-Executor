@@ -13,7 +13,7 @@ main = interact (unlines . (map parseProp) . lines)
 parseProp :: String -> String
 parseProp s = case ret of
     Left e -> "error: " ++ show e
-    Right n -> "parsed: " ++ show (isTautology (derive n))
+    Right n -> "Tautology? " ++ show (isTautology (derive n))
   where
     ret = parse parseSequent "" s
 

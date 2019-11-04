@@ -2,6 +2,7 @@ module Main where
 
 import Type.Proposition
 import Type.Sequent
+import Type.Derivation
 import Text.Parsec
 import Parser.SequentParser
 import Interpreter.SequentInterpreter 
@@ -12,7 +13,7 @@ main = interact (unlines . (map parseProp) . lines)
 parseProp :: String -> String
 parseProp s = case ret of
     Left e -> "error: " ++ show e
-    Right n -> "parsed: " ++ show derive n
+    Right n -> "parsed: " ++ show (isTautology (derive n))
   where
     ret = parse parseSequent "" s
 
