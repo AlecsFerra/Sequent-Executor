@@ -9,7 +9,6 @@ import Interpreter.SequentInterpreter
 
 main :: IO ()
 main = do
-  putStr "Inser a sequent: "
   ins <- getLine
   case rawParse ins of
     Left e    -> putStrLn $ "Error: " ++ show e

@@ -18,7 +18,7 @@ instance Show Derivation where
 roseShow :: Int -> Derivation -> String
 roseShow d (NotDerivable s)         = "\n" ++ (mul "-" d) ++ " " ++ show s ++ " {NOT DERIVABLE}"
 roseShow d (Axiom s t)              = "\n" ++ (mul "-" d) ++ " " ++ show s ++ " {Axiom: " ++ t ++ "}"
-roseShow d (NormalDerivation s c t) = "\n" ++ (mul "-" d) ++ " " ++ show s ++ " {" ++ t ++ "}" ++ concat (map ( roseShow (d + 1)) c)
+roseShow d (NormalDerivation s c t) = "\n" ++ (mul "-" d) ++ " " ++ show s ++ " {" ++ t ++ "}" ++ concat (map (roseShow (d + 1)) c)
 
 mul :: String -> Int -> String
 mul s n = concat (replicate (n * 2) s)
