@@ -22,7 +22,7 @@ instance Show Proposition where
     show TTrue = "tt"
     show FFalse = "⊥"
     show (Atom c) = show c
-    show (Not p) ++ showBracketIfNecessary p
+    show (Not p) =  "¬" ++ showBracketIfNecessary p
     show (And p1 p2) = showBracketIfNecessary p1 ++ " & "  ++ showBracketIfNecessary p2
     show (Or p1 p2) = showBracketIfNecessary p1 ++ " ∨ "  ++ showBracketIfNecessary p2
     show (Imply p1 p2) = showBracketIfNecessary p1 ++ " → " ++ showBracketIfNecessary p2
