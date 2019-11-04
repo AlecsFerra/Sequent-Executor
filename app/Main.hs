@@ -8,14 +8,31 @@ import Parser.SequentParser
 import Interpreter.SequentInterpreter 
 
 main :: IO ()
-main = interact (unlines . (map parseProp) . lines)
-
-parseProp :: String -> String
-parseProp s = case ret of
-    Left e -> "error: " ++ show e
-    Right n -> "Tautology? " ++ show (isTautology (derive n))
-  where
-    ret = parse parseSequent "" s
+main = do
+  putStr "Inser a sequent: "
+  ins <- getLine
+  case rawParse ins of
+    Left e    -> putStrLn $ "Error: " ++ show e
+    Right seq -> do
+      print derived
+      case tau of
+        True  -> putStrLn "The inserted sequent is a tautology"
+        False -> do
+          putStrLn "The inserted sequent wasn't a tautology"
+          putStrLn "Now evaluating the opposite"
+          print derivedOpposite
+          case para of
+            True -> putStrLn "The inserted sequent is a paradox"
+            False -> putStrLn "The inserted sequent is an opinion"
+     where
+      derived = derive seq
+      tau = isTautology derived
+      oppositeSeq = opposite seq
+      derivedOpposite = derive oppositeSeq
+      para = isTautology derivedOpposite
+  
+rawParse :: String -> Either ParseError Sequent
+rawParse = parse parseSequent ""
 
 {-}    print (Sequent [] [Atom 'C'])
     print (Sequent [And (Atom 'C') (Atom 'C')] [])

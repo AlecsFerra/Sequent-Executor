@@ -18,7 +18,7 @@ derive s@(Sequent sx xd)
         a@(Atom _) -> NormalDerivation s [derive (Sequent (tail sx ++ [a]) xd)]                               "sc-S"
     | not $ allAtomOrNull xd = case dh of
         Not a      -> NormalDerivation s [derive (Sequent (a:sx) (tail xd))]                                  "¬-D"
-        And a b    -> NormalDerivation s [derive (Sequent sx (a:tail xd)), derive (Sequent sx (a:tail xd))]   "&-D"
+        And a b    -> NormalDerivation s [derive (Sequent sx (a:tail xd)), derive (Sequent sx (b:tail xd))]   "&-D"
         Or a b     -> NormalDerivation s [derive (Sequent sx (a:b:tail xd))]                                  "∨-D"
         Imply a b  -> NormalDerivation s [derive (Sequent (a:sx) (b:tail xd))]                                "→-D"
         a@(Atom _) -> NormalDerivation s [derive (Sequent sx (tail xd ++ [a]))]                               "sc-D"

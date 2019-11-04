@@ -7,7 +7,8 @@ data Proposition = TTrue
                  | Or    Proposition Proposition
                  | Not   Proposition
                  | Imply Proposition Proposition
-
+                 deriving (Eq)
+{-
 instance Eq Proposition where
   (==) TTrue TTrue                 = True
   (==) FFalse FFalse               = False
@@ -17,7 +18,7 @@ instance Eq Proposition where
   (==) (Not a) (Not b)             = a == b
   (==) (Imply a1 b1) (Imply a2 b2) = (a1 == a2 && b1 == b2)
   (==) _ _                         = False
-
+-}
 instance Show Proposition where
     show TTrue = "tt"
     show FFalse = "⊥"
@@ -26,6 +27,16 @@ instance Show Proposition where
     show (And p1 p2) = showBracketIfNecessary p1 ++ " & "  ++ showBracketIfNecessary p2
     show (Or p1 p2) = showBracketIfNecessary p1 ++ " ∨ "  ++ showBracketIfNecessary p2
     show (Imply p1 p2) = showBracketIfNecessary p1 ++ " → " ++ showBracketIfNecessary p2
+
+andAll :: [Proposition] -> Proposition
+andAll [] = TTrue
+andAll (x:[]) = x     
+andAll (x:xs) = And x (andAll xs)
+
+orAll :: [Proposition] -> Proposition
+orAll []     = FFalse
+orAll (x:[]) = x     
+orAll (x:xs) = Or x (andAll xs)
 
 showBracketIfNecessary :: Proposition -> String
 showBracketIfNecessary (Atom id) = show id
