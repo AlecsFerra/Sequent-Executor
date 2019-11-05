@@ -23,3 +23,7 @@ Le liste prima e dopo il sequente possono anche essere vuote addirirttura in amb
 'A' ⊢
 ```
 Sono tutte e 3 espressioni accettate.
+
+## Suddivisione del progetto
+Nella cartella app è presente solamente la logica di I/O
+Mentre nella cartella src è presente tutta la logica di parsing e derivazione dei sequenti
