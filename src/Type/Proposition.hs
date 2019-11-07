@@ -7,8 +7,7 @@ data Proposition = TTrue
                  | Or    Proposition Proposition
                  | Not   Proposition
                  | Imply Proposition Proposition
-                 deriving (Eq)
-{-
+
 instance Eq Proposition where
   (==) TTrue TTrue                 = True
   (==) FFalse FFalse               = False
@@ -16,9 +15,9 @@ instance Eq Proposition where
   (==) (And a1 b1) (And a2 b2)     = (a1 == a2 && b1 == b2) || (a1 == b2 || a2 == b1)  
   (==) (Or a1 b1) (Or a2 b2)       = (a1 == a2 && b1 == b2) || (a1 == b2 || a2 == b1)
   (==) (Not a) (Not b)             = a == b
-  (==) (Imply a1 b1) (Imply a2 b2) = (a1 == a2 && b1 == b2)
+  (==) (Imply a1 b1) (Imply a2 b2) = a1 == a2 && b1 == b2
   (==) _ _                         = False
--}
+
 instance Show Proposition where
     show TTrue = "tt"
     show FFalse = "⊥"
@@ -30,12 +29,12 @@ instance Show Proposition where
 
 andAll :: [Proposition] -> Proposition
 andAll [] = TTrue
-andAll (x:[]) = x     
+andAll [x] = x     
 andAll (x:xs) = And x (andAll xs)
 
 orAll :: [Proposition] -> Proposition
 orAll []     = FFalse
-orAll (x:[]) = x     
+orAll [x] = x     
 orAll (x:xs) = Or x (andAll xs)
 
 showBracketIfNecessary :: Proposition -> String
