@@ -5,7 +5,9 @@ import Type.Sequent
 import Type.Derivation
 import Text.Parsec
 import Parser.SequentParser
-import Interpreter.SequentInterpreter 
+import Interpreter.SequentInterpreter
+import Type.Latex.LatexShowable
+import System.Environment.Blank (getArgs)
 
 main :: IO ()
 main = do
@@ -13,25 +15,29 @@ main = do
   case rawParse ins of
     Left e    -> putStrLn $ "Error: " ++ show e
     Right seq -> do
-      print derived
+      putStrLn (derivationPrinter derived)
       case tau of
         True  -> putStrLn "The inserted sequent is a tautology"
         False -> do
           putStrLn "The inserted sequent wasn't a tautology"
           putStrLn "Now evaluating the opposite"
-          print derivedOpposite
+          putStrLn (derivationPrinter derivedOpposite)
           case para of
             True -> putStrLn "The inserted sequent is a paradox"
             False -> putStrLn "The inserted sequent is an opinion"
      where
-      derived = derive seq
+      derivationPrinter = showLatex
+      mode = True
+      derived = derive mode seq
       tau = isTautology derived
       oppositeSeq = opposite seq
-      derivedOpposite = derive oppositeSeq
+      derivedOpposite = derive mode oppositeSeq
       para = isTautology derivedOpposite
   
 rawParse :: String -> Either ParseError Sequent
 rawParse = parse parseSequent ""
+
+
 
 {-}    print (Sequent [] [Atom 'C'])
     print (Sequent [And (Atom 'C') (Atom 'C')] [])

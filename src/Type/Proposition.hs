@@ -25,7 +25,7 @@ instance Show Proposition where
     show (Not p) =  "¬" ++ showBracketIfNecessary p
     show (And p1 p2) = showBracketIfNecessary p1 ++ " & "  ++ showBracketIfNecessary p2
     show (Or p1 p2) = showBracketIfNecessary p1 ++ " ∨ "  ++ showBracketIfNecessary p2
-    show (Imply p1 p2) = showBracketIfNecessary p1 ++ " → " ++ showBracketIfNecessary p2
+    show (Imply p1 p2) = show p1 ++ " → " ++ show p2
 
 andAll :: [Proposition] -> Proposition
 andAll [] = TTrue
