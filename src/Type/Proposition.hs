@@ -10,7 +10,7 @@ data Proposition = TTrue
 
 instance Eq Proposition where
   (==) TTrue TTrue                 = True
-  (==) FFalse FFalse               = False
+  (==) FFalse FFalse               = True
   (==) (Atom a) (Atom b)           = a == b
   (==) (And a1 b1) (And a2 b2)     = (a1 == a2 && b1 == b2) || (a1 == b2 || a2 == b1)  
   (==) (Or a1 b1) (Or a2 b2)       = (a1 == a2 && b1 == b2) || (a1 == b2 || a2 == b1)

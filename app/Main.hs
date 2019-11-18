@@ -6,32 +6,30 @@ import Type.Derivation
 import Text.Parsec
 import Parser.SequentParser
 import Interpreter.SequentInterpreter
-import Type.Latex.LatexShowable
+import Type.Latex.ShowLatex
 import System.Environment.Blank (getArgs)
 
 main :: IO ()
 main = do
   ins <- getLine
   case rawParse ins of
-    Left e    -> putStrLn $ "Error: " ++ show e
+    Left e -> putStrLn $ "Error: " ++ show e
     Right seq -> do
       putStrLn (derivationPrinter derived)
-      case tau of
-        True  -> putStrLn "The inserted sequent is a tautology"
-        False -> do
-          putStrLn "The inserted sequent wasn't a tautology"
-          putStrLn "Now evaluating the opposite"
-          putStrLn (derivationPrinter derivedOpposite)
-          case para of
-            True -> putStrLn "The inserted sequent is a paradox"
-            False -> putStrLn "The inserted sequent is an opinion"
-     where
-      derivationPrinter = showLatex
-      derived = derive seq
-      tau = isTautology derived
-      oppositeSeq = opposite seq
-      derivedOpposite = derive oppositeSeq
-      para = isTautology derivedOpposite
+      if tau
+        then putStrLn "The inserted sequent is a tautology"
+        else (do putStrLn "The inserted sequent wasn't a tautology"
+                 putStrLn "Now evaluating the opposite"
+                 putStrLn (derivationPrinter derivedOpposite)
+                 if para
+                   then putStrLn "The inserted sequent is a paradox"
+                   else putStrLn "The inserted sequent is an opinion")
+      where derivationPrinter = showLatex
+            derived = derive seq
+            tau = isTautology derived
+            oppositeSeq = opposite seq
+            derivedOpposite = derive oppositeSeq
+            para = isTautology derivedOpposite
   
 rawParse :: String -> Either ParseError Sequent
 rawParse = parse parseSequent ""

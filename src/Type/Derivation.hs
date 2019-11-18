@@ -27,15 +27,15 @@ data Action = Action Side Operation
             deriving (Eq)
 
 instance Show Side where
-  show LLeft  = "L"
-  show RRight = "R"
+  show LLeft  = "sx"
+  show RRight = "dx"
 
 instance Show Operation where
-  show Negate  = ""
-  show Swap    = ""
-  show Anded   = ""
-  show Ored    = ""
-  show Implied = ""
+  show Negate  = "¬"
+  show Swap    = "sc"
+  show Anded   = "&"
+  show Ored    = "∨"
+  show Implied = "→"
 
 instance Show Action where
   show (Action s op) = show s ++ "-" ++ show op

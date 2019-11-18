@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 22a0068a1fba688e962bc6e0e1330a80597f9c0fc4d03ca984349f189f9debf6
+-- hash: 53500a2241d2e878c3b1bf4a60e88ad1c43430a2f9e8412aebcef8b635a48b02
 
 name:           SequentExecutor
 version:        0.1.0.0
@@ -31,7 +31,7 @@ library
       Parser.PropositionParser
       Parser.SequentParser
       Type.Derivation
-      Type.Latex.LatexShowable
+      Type.Latex.ShowLatex
       Type.Proposition
       Type.Sequent
   other-modules:
