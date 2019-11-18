@@ -29,7 +29,21 @@ instance LatexShowable Derivation where
 latexDerivationComponent :: Derivation -> [String]
 latexDerivationComponent (NotDerivable s)         = ["\\AxiomC{$ " ++ showLatex s ++ " $}"]
 latexDerivationComponent (Axiom s t)              = ["\\UnaryInfC{$ " ++ showLatex s ++ " $}"] ++  ["\\noLine"] ++ ["\\AxiomC{ " ++ show t ++ "}"]
-latexDerivationComponent (NormalDerivation s c t) = [provideRightInf c ++ showLatex s ++  " $}"] ++ ["\\RightLabel{" ++ show t ++ "}"] ++ concatMap latexDerivationComponent c
+latexDerivationComponent (NormalDerivation s c t) = [provideRightInf c ++ showLatex s ++  " $}"] ++ ["\\RightLabel{$ " ++ showLatex t ++ "$ }"] ++ concatMap latexDerivationComponent c
+
+instance LatexShowable Operation where
+ showLatex Anded   = "\\&"
+ showLatex Ored    = "v"
+ showLatex Negate  = "\\neg"
+ showLatex Implied = "\\rightarrow"
+ showLatex Swap    = "sc"
+
+instance LatexShowable Side where
+  showLatex LLeft  = "sx"
+  showLatex RRight = "dx"
+
+instance LatexShowable Action where
+  showLatex (Action s op) = showLatex op ++ " - " ++ showLatex s
 
 provideRightInf :: [a] -> String
 provideRightInf l

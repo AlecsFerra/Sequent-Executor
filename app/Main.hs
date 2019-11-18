@@ -27,11 +27,10 @@ main = do
             False -> putStrLn "The inserted sequent is an opinion"
      where
       derivationPrinter = showLatex
-      mode = True
-      derived = derive mode seq
+      derived = derive seq
       tau = isTautology derived
       oppositeSeq = opposite seq
-      derivedOpposite = derive mode oppositeSeq
+      derivedOpposite = derive oppositeSeq
       para = isTautology derivedOpposite
   
 rawParse :: String -> Either ParseError Sequent
